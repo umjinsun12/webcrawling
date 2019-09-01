@@ -112,6 +112,27 @@ request(options, function (error, response, body) {
 
 });
 
+
+app.get('/book', function(req, res){
+	var categoryId = req.query.categoryId;
+
+	var options = { method: 'GET',
+  url: 'http://book.interpark.com/api/bestSeller.api',
+  qs:
+   { key: '557BE93FBD927C7349417B271D092A1F5DAD3CB7D276568E87D9A3AC8FB7D1D9',
+     categoryId: categoryId,
+     output: 'json' },
+  headers:
+   { 'postman-token': 'e65e0909-cf01-c588-c755-6c745b773bde',
+     'cache-control': 'no-cache' } };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+  res.json(JSON.parse(body));
+});
+
+});
+
 var server = app.listen(80, '178.128.100.202', function(){
 	console.log("Express server has started on port 80");
 });
